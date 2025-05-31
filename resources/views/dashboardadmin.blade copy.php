@@ -23,12 +23,6 @@
     <div class="p-10">
         <h1 class="text-2xl font-bold mb-6">Dashboard Ketersediaan Ruang Bedah</h1>
 
-        <div class="mb-6 p-4 bg-white shadow rounded-lg">
-            <p class="text-lg">Jumlah Ruang Bedah Tersedia: 
-                <span id="ruang-Bedah" class="font-bold text-blue-500">5</span>
-            </p>
-        </div>
-
         <div class="bg-white shadow-md rounded-lg p-4 mb-6">
             <h2 class="text-lg font-bold mb-4">Detail Data Pasien</h2>
             <table class="min-w-full">

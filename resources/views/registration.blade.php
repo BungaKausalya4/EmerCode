@@ -35,7 +35,12 @@
                     <i class="fas fa-eye absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer" onclick="togglePassword('confirm-password', this)"></i>
                 </div>
                 
-                <button class="w-full bg-blue-500 text-white p-3 rounded-lg font-semibold hover:bg-blue-600">Sign Up</button>
+                <a href="{{ route('dashboardadmin') }}">
+                    <button type="button" class="w-full bg-blue-500 text-white p-3 rounded-lg font-semibold hover:bg-blue-600">
+                        Sign In
+                    </button>
+                </a>
+                
             </form>
         </div>
         <div class="bg-blue-500 text-white p-8 md:w-1/2 rounded-b-lg md:rounded-r-lg md:rounded-bl-none flex flex-col items-center justify-center">

@@ -25,8 +25,10 @@
 </div>
 
                 
-<a href="{{ route('dashboard') }}">
-    <button class="w-full bg-blue-500 text-white p-3 rounded-lg font-semibold hover:bg-blue-600">Sign In</button>
+<a href="{{ route('dashboardadmin') }}">
+    <button type="button" class="w-full bg-blue-500 text-white p-3 rounded-lg font-semibold hover:bg-blue-600">
+        Sign In
+    </button>
 </a>
 
             </form>
