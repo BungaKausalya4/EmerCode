@@ -7,12 +7,17 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
 </head>
 <body class="bg-gray-50">
+
     <!-- Navbar -->
     <div class="w-full bg-white shadow-md p-4 flex items-center justify-between">
         <!-- Kiri: Logo -->
         <img alt="Logo" class="rounded-full h-10" src="image/logo.png"/>
+        
         <!-- Kanan: Tombol Aksi -->
         <div class="flex items-center space-x-4">
+            <button onclick="tampilkanModalTambahRuang()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition shadow">
+                Tambah Ruang Bedah
+            </button>
             <a href="#" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition shadow">
                 Logout
             </a>
@@ -74,20 +79,13 @@
                                 Tidak Perlu
                             </button>
                         </td>
-                        
                     </tr>
                 </tbody>
             </table>
         </div>
-
-        <div class="bg-white shadow-md rounded-lg p-4">
-            <h2 class="text-lg font-bold mb-4">Form Tambah Ruang Bedah</h2>
-            <input id="jumlah-baru" class="border rounded-lg p-2 w-full" type="number" placeholder="Jumlah ruang tambahan"/>
-            <button onclick="tambahRuang()" class="mt-2 bg-green-500 text-white px-4 py-2 rounded-lg">Tambah</button>
-        </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Diagnosa -->
     <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
         <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
             <h3 class="text-xl font-bold mb-4">Diagnosa Sementara</h3>
@@ -102,6 +100,18 @@
         </div>
     </div>
 
+    <!-- Modal Tambah Ruang Bedah -->
+    <div id="modalTambahRuang" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
+        <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+            <h3 class="text-xl font-bold mb-4">Tambah Ruang Bedah</h3>
+            <input id="jumlah-baru" class="border rounded-lg p-2 w-full mb-4" type="number" placeholder="Jumlah ruang tambahan"/>
+            <div class="flex justify-end gap-2">
+                <button onclick="tutupModalTambahRuang()" class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500">Batal</button>
+                <button onclick="tambahRuang()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Simpan</button>
+            </div>
+        </div>
+    </div>
+
     <!-- JavaScript -->
     <script>
         let ruangBedah = 5;
@@ -112,12 +122,6 @@
             } else if (select.value === 'selesai') {
                 ruangBedah++;
             }
-            document.getElementById('ruang-Bedah').innerText = ruangBedah;
-        }
-
-        function tambahRuang() {
-            let jumlah = parseInt(document.getElementById('jumlah-baru').value) || 0;
-            ruangBedah += jumlah;
             document.getElementById('ruang-Bedah').innerText = ruangBedah;
         }
 
@@ -138,60 +142,61 @@
             document.getElementById('modal').classList.add('hidden');
         }
 
-        function kurangiRuangBedah(button) {
-            if (ruangBedah > 0) {
-                ruangBedah--;
-                document.getElementById('ruang-Bedah').innerText = ruangBedah;
+        function tampilkanModalTambahRuang() {
+            document.getElementById('modalTambahRuang').classList.remove('hidden');
+            document.getElementById('modalTambahRuang').classList.add('flex');
+        }
 
-                // Nonaktifkan tombol agar tidak bisa ditekan dua kali
-                button.disabled = true;
-                button.classList.add('bg-gray-400', 'cursor-not-allowed');
-                button.classList.remove('bg-blue-500', 'hover:bg-blue-600');
-                button.innerText = "Sudah";
+        function tutupModalTambahRuang() {
+            document.getElementById('modalTambahRuang').classList.remove('flex');
+            document.getElementById('modalTambahRuang').classList.add('hidden');
+        }
+
+        function tambahRuang() {
+            let jumlah = parseInt(document.getElementById('jumlah-baru').value) || 0;
+            if (jumlah > 0) {
+                ruangBedah += jumlah;
+                document.getElementById('ruang-Bedah').innerText = ruangBedah;
+                tutupModalTambahRuang();
+                document.getElementById('jumlah-baru').value = '';
             } else {
-                alert("Tidak ada ruang Bedah yang tersedia.");
+                alert("Masukkan jumlah ruang yang valid.");
             }
         }
 
         function handleRuangBedah(button, isPerlu) {
-    const container = button.parentElement;
-    const btnPerlu = container.querySelector('.btn-perlu');
-    const btnTidak = container.querySelector('.btn-tidak');
+            const container = button.parentElement;
+            const btnPerlu = container.querySelector('.btn-perlu');
+            const btnTidak = container.querySelector('.btn-tidak');
 
-    if (btnPerlu.disabled || btnTidak.disabled) {
-        return; // Sudah dipilih, gak bisa klik lagi
-    }
+            if (btnPerlu.disabled || btnTidak.disabled) {
+                return;
+            }
 
-    if (isPerlu) {
-        // Kurangi ruang bedah
-        if (ruangBedah > 0) {
-            ruangBedah--;
-            document.getElementById('ruang-Bedah').innerText = ruangBedah;
+            if (isPerlu) {
+                if (ruangBedah > 0) {
+                    ruangBedah--;
+                    document.getElementById('ruang-Bedah').innerText = ruangBedah;
 
-            // Ubah tampilan tombol
-            btnPerlu.classList.remove('hover:bg-green-600');
-            btnPerlu.classList.add('bg-green-500');
+                    btnPerlu.classList.remove('hover:bg-green-600');
+                    btnPerlu.classList.add('bg-green-500');
 
-            btnTidak.classList.remove('bg-red-500', 'hover:bg-red-600');
-            btnTidak.classList.add('bg-gray-400', 'cursor-not-allowed');
-        } else {
-            alert("Tidak ada ruang Bedah yang tersedia.");
-            return;
+                    btnTidak.classList.remove('bg-red-500', 'hover:bg-red-600');
+                    btnTidak.classList.add('bg-gray-400', 'cursor-not-allowed');
+                } else {
+                    alert("Tidak ada ruang Bedah yang tersedia.");
+                    return;
+                }
+            } else {
+                btnPerlu.classList.remove('bg-green-500', 'hover:bg-green-600');
+                btnPerlu.classList.add('bg-gray-400', 'cursor-not-allowed');
+                
+                btnTidak.classList.add('bg-red-500');
+            }
+
+            btnPerlu.disabled = true;
+            btnTidak.disabled = true;
         }
-    } else {
-        // Tidak mengubah jumlah ruang bedah
-
-        btnPerlu.classList.remove('bg-green-500', 'hover:bg-green-600');
-        btnPerlu.classList.add('bg-gray-400', 'cursor-not-allowed');
-        
-        btnTidak.classList.add('bg-red-500');
-    }
-
-    // Disable kedua tombol
-    btnPerlu.disabled = true;
-    btnTidak.disabled = true;
-}
-
     </script>
 </body>
 </html>
