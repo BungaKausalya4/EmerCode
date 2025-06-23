@@ -1,0 +1,47 @@
+digraph {
+	A [label=Mulai shape=oval]
+	B [label="Dataset dan Preprocessing" shape=parallelogram]
+	C1 [label="Data Cleaning
+- Tangani missing values
+- Normalisasi data" shape=rectangle]
+	C2 [label="Feature Engineering
+- PCA
+- RFE" shape=rectangle]
+	D [label="Arsitektur Model" shape=parallelogram]
+	D1 [label="Baseline Model
+- Decision Tree
+- Random Forest
+- SVM" shape=rectangle]
+	D2 [label="Proposed Model
+- PCA + Classifier
+- Hybrid Model (XGBoost, LightGBM, Stacking)" shape=rectangle]
+	E [label="Training dan Validasi" shape=parallelogram]
+	E1 [label="K-Fold Cross Validation (K=5)" shape=rectangle]
+	E2 [label="Hyperparameter Tuning
+(Grid Search)" shape=rectangle]
+	E3 [label="Evaluasi Model
+- Accuracy, F1-Score
+- Precision, Recall
+- Confusion Matrix" shape=rectangle]
+	F [label="Implementasi Teknologi" shape=parallelogram]
+	F1 [label="Python & Library
+- Scikit-Learn, XGBoost
+- LightGBM, Pandas, Numpy, Matplotlib, Seaborn" shape=rectangle]
+	F2 [label="Pipeline Implementasi
+(preprocessing hingga evaluasi)" shape=rectangle]
+	G [label=Selesai shape=oval]
+	A -> B
+	B -> C1
+	C1 -> C2
+	C2 -> D
+	D -> D1
+	D1 -> D2
+	D2 -> E
+	E -> E1
+	E1 -> E2
+	E2 -> E3
+	E3 -> F
+	F -> F1
+	F1 -> F2
+	F2 -> G
+}

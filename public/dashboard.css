@@ -1,0 +1,231 @@
+/* =======================
+   Root Color Variables
+========================== */
+:root {
+    --primary-blue: #015494;
+    --accent-green: #61F5A1;
+    --light-blue: #E3F2FD;
+    --light-green: #E8F5E9;
+    --hover-blue: #003c6e;
+    --hover-green: #48d38d;
+    --gradient-blue: linear-gradient(135deg, #0277bd, #015494);
+    --gradient-green: linear-gradient(135deg, #61f5a1, #3ddc84);
+    --soft-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-blur: blur(8px);
+}
+
+/* =======================
+   Body Styling
+========================== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #f5f9fc, #f0f9f7);
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+    transition: background 0.5s ease;
+}
+
+/* =======================
+   Navbar
+========================== */
+.navbar {
+    background: white;
+    box-shadow: var(--soft-shadow);
+    padding: 12px 24px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar:hover {
+    transform: scale(1.01);
+}
+
+.navbar a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    margin: 0 12px;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+    color: var(--hover-blue);
+}
+
+/* =======================
+   Section Headers
+========================== */
+h1, h2 {
+    color: var(--primary-blue);
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+/* =======================
+   Card Styling
+========================== */
+.card {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border-radius: 16px;
+    box-shadow: var(--soft-shadow);
+    padding: 24px;
+    margin-bottom: 24px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 5px solid var(--accent-green);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::after {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: var(--accent-green);
+    border-radius: 50%;
+    opacity: 0.1;
+    top: -30px;
+    right: -30px;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* =======================
+   Table Styling
+========================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+table thead {
+    background: var(--gradient-blue);
+    color: white;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+table th, table td {
+    padding: 12px 16px;
+    text-align: left;
+}
+
+table tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+table tbody tr:hover {
+    background-color: #eef9ff;
+}
+
+td:first-child {
+    color: var(--primary-blue);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+td:first-child:hover {
+    text-decoration: underline;
+}
+
+/* =======================
+   Buttons
+========================== */
+button {
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    box-shadow: var(--soft-shadow);
+}
+
+button:hover {
+    transform: translateY(-2px) scale(1.03);
+}
+
+button.bg-green-500 {
+    background: var(--gradient-green);
+    color: black;
+}
+
+button.bg-green-500:hover {
+    background: var(--hover-green);
+}
+
+button.bg-red-500 {
+    background: #e53935;
+    color: white;
+}
+
+button.bg-red-500:hover {
+    background: #b71c1c;
+}
+
+/* =======================
+   Modal
+========================== */
+#modal {
+    backdrop-filter: blur(6px);
+    background-color: rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease-in-out;
+}
+
+#modal .bg-white {
+    border-left: 6px solid var(--primary-blue);
+    padding: 20px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    max-width: 600px;
+    margin: auto;
+}
+
+/* =======================
+   Input & Select
+========================== */
+input[type="number"], select {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 8px 12px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
+}
+
+input[type="number"]:focus,
+select:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 6px rgba(1, 84, 148, 0.25);
+    outline: none;
+}
+
+/* =======================
+   Animasi tambahan
+========================== */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card, .navbar, .modal, table, button {
+    animation: fade-in 0.6s ease-in-out;
+}
